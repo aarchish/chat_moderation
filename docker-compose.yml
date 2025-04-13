@@ -1,24 +1,19 @@
-version: "3.9"
+version: '3.8'
 
 services:
-  web:
-    build: .
-    command: python backend/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/code
+  backend:
+    build: ./backend
     ports:
       - "8000:8000"
-    depends_on:
-      - db
-
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: moderation_db
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - ./backend:/app
+    working_dir: /app  # Ensure the working directory is set to /app
+    depends_on:
+      - moderation_service
 
-volumes:
-  postgres_data:
+  moderation_service:
+    build: ./moderation_service
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./moderation_service:/app
