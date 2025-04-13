@@ -1,19 +1,38 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: chat_moderation
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend_net
+  
+  moderation_service:
+    build: ./moderation_service
+    volumes:
+      - ./moderation_service:/app
+    networks:
+      - backend_net
+  
   backend:
     build: ./backend
     ports:
       - "8000:8000"
     volumes:
       - ./backend:/app
-    working_dir: /app  # Ensure the working directory is set to /app
     depends_on:
       - moderation_service
+      - db
+    networks:
+      - backend_net
 
-  moderation_service:
-    build: ./moderation_service
-    ports:
-      - "8001:8001"
-    volumes:
-      - ./moderation_service:/app
+volumes:
+  postgres_data:
+
+networks:
+  backend_net:

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from backend import utils
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,10 +80,15 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': Path(__file__).resolve().parent / "db.sqlite3",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': utils.DB_NAME,
+        'USER': utils.DB_USER,
+        'PASSWORD': utils.DB_PASSWORD,
+        'HOST': utils.DB_HOST,
+        'PORT': utils.DB_PORT,
     }
 }
+
 
 
 # Password validation
