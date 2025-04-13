@@ -18,8 +18,9 @@ class CommentView(APIView):
         user = self.request.user
         text = self.request.data.get("text", "")
 
-        flagged_labels = moderate_text(text)  # Moderating the text using the external Hugging Face API
-        is_flagged = len(flagged_labels) > 0
+        response = moderate_text(text) # Moderating the text using the Moderation MicroService with Hugging Face API 
+        flagged_labels = response.get("labels", [])
+        is_flagged = response.get("flagged", False)
 
         # Save the comment instance with the flagged status
         instance = serializer.save(user=user, flagged=is_flagged, moderation_labels=flagged_labels)
