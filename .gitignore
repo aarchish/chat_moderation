@@ -1,6 +1,25 @@
 # Ignore node_modules folder
 node_modules/
+# Ignore Python compiled files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
 
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore Django specific files
+*.sqlite3
+db.sqlite3
+*.log
+staticfiles/
+media/
+
+# Ignore FastAPI specific files
+instance/
+*.db
 # Ignore log files
 *.log
 logs/
