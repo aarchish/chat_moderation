@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # Add Django REST framework
     'rest_framework_simplejwt',  # Add SimpleJWT for token auth
-    'users',  # Add the users app
-    'content',  # Add the content app
+    'backend.users',  # Add the users app
+    'backend.content',  # Add the content app
 ]
 
 

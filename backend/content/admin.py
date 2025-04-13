@@ -1,7 +1,7 @@
 # content/admin.py
 
 from django.contrib import admin
-from .models import Comment
+from backend.content.models import Comment
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

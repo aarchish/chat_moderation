@@ -1,7 +1,7 @@
 # content/urls.py
 
 from django.urls import path
-from .views import CommentView, FlaggedCommentsView
+from backend.content.views import CommentView, FlaggedCommentsView
 
 urlpatterns = [
     path('comment/', CommentView.as_view(), name='comment'),
