@@ -1,6 +1,10 @@
-Django>=4.2
-djangorestframework
-psycopg2-binary
-python-dotenv
-djangorestframework-simplejwt
-requests
+# backend/requirements.txt
+
+# This file is used to install the required packages for the backend service.
+
+backend==0.2.4.1
+Django==5.2
+djangorestframework==3.16.0
+djangorestframework_simplejwt==5.5.0
+python-dotenv==1.1.0
+Requests==2.32.3

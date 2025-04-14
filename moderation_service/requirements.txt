@@ -1,7 +1,10 @@
 # moderation_service/requirements.txt
-fastapi==0.95.0
-uvicorn==0.22.0
-requests==2.28.1
-pydantic==1.10.4
-python-dotenv==0.21.1
 
+# This file is used to install the required packages for the moderation service.
+
+fastapi==0.115.12
+pydantic==2.11.3
+pydantic_settings==2.8.1
+python-dotenv==1.1.0
+Requests==2.32.3
+uvicorn==0.34.0

@@ -4,9 +4,9 @@ import requests
 from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from backend.content.utils import moderate_text
-from backend.content.models import Comment
-from backend.content.serializers import CommentSerializer
+from content.utils import moderate_text
+from content.models import Comment
+from content.serializers import CommentSerializer
 
 class CommentView(APIView):
     queryset = Comment.objects.all()

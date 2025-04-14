@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:15
@@ -16,6 +14,8 @@ services:
     build: ./moderation_service
     volumes:
       - ./moderation_service:/app
+    env_file:
+      - ./.env
     networks:
       - backend_net
   
@@ -23,13 +23,18 @@ services:
     build: ./backend
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend:/app
+    # volumes:
+    #   - ./backend:/app
+    env_file:
+      - ./.env
+    # environment:
+    #   PYTHONPATH: "/app/backend"  # Ensure the PYTHONPATH is set correctly
+    #   DJANGO_SETTINGS_MODULE: "backend.settings"  # Explicitly set the settings module
+    networks:
+      - backend_net
     depends_on:
       - moderation_service
       - db
-    networks:
-      - backend_net
 
 volumes:
   postgres_data:
