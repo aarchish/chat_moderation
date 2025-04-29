@@ -1,0 +1,80 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+*.pdb
+
+# Virtual Environment
+venv/
+env/
+
+# Django
+db.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+media/
+staticfiles/
+
+# FastAPI
+app.log
+
+# Environment Variables
+.env
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Byte-compiled files
+*.py[cod]
+
+# Test Coverage
+htmlcov/
+.coverage
+*.cover
+.hypothesis/
+
+# Build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Pipenv
+Pipfile
+Pipfile.lock
+
+# Pyre
+.pyre/
+
+# MyPy
+.mypy_cache/
+
+# Pytest
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Logs
+*.log
+*.out
+*.err
+
+# Temporary Files
+*.tmp
+*.bak
+*.old
+*.orig
+*.save
