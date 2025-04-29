@@ -1,16 +1,16 @@
-from django.shortcuts import render
+# ai_chat_moderation/content/views.py
+
+from content.models import Comment
+from content.serializer import CommentSerializer
+from content.utils import moderate_text
+from rest_framework import permissions, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 # Create your views here.
 
 # content/views.py
 
-import requests
-from rest_framework import status, permissions
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from content.utils import moderate_text
-from content.models import Comment
-from content.serializer import CommentSerializer
 
 class CommentView(APIView):
     queryset = Comment.objects.all()
@@ -22,33 +22,42 @@ class CommentView(APIView):
         user = self.request.user
         text = self.request.data.get("text", "")
 
-        response = moderate_text(text) # Moderating the text using the Moderation MicroService with Hugging Face API 
+        response = moderate_text(
+            text
+        )  # Moderating the text using the Moderation MicroService with Hugging Face API
         flagged_labels = response.get("labels", [])
         is_flagged = response.get("flagged", False)
 
         # Save the comment instance with the flagged status
-        instance = serializer.save(user=user, flagged=is_flagged, moderation_labels=flagged_labels)
+        instance = serializer.save(
+            user=user, flagged=is_flagged, moderation_labels=flagged_labels
+        )
 
         # Optionally log the flagged comment for moderation
         if is_flagged:
-            print(f"Comment by {user.username} flagged for moderation: {flagged_labels}")
+            print(
+                f"Comment by {user.username} flagged for moderation: {flagged_labels}"
+            )
 
     def post(self, request, *args, **kwargs):
         # Initialize serializer with incoming data
         serializer = CommentSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             # Perform the actual comment creation and moderation
             self.perform_create(serializer)
-            
+
             # Return the created comment data with a possible moderation notice
             response = CommentSerializer(serializer.instance).data
             if response.get("flagged"):
-                response["moderation_notice"] = "Your comment has been flagged for moderation."
-            
+                response["moderation_notice"] = (
+                    "Your comment has been flagged for moderation."
+                )
+
             return Response(response, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
 class FlaggedCommentsView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 

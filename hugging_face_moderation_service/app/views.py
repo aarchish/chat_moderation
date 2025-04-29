@@ -1,14 +1,16 @@
 # app/views.py
-from fastapi import APIRouter, HTTPException
 from app.models import Comment
 from app.services import moderate_text
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 comment_router = APIRouter()
 
+
 class ModerationResponse(BaseModel):
     flagged: bool
     labels: list[str]
+
 
 @comment_router.post("/comment/")
 async def create_comment(comment: Comment):

@@ -1,9 +1,9 @@
 # app/main.py
 
-from fastapi import FastAPI
-from app.views import comment_router
+# from app.config import settings
 from app.logging_config import setup_logging
-from app.config import settings
+from app.views import comment_router
+from fastapi import FastAPI
 
 # Initialize logging when the application starts
 setup_logging()

@@ -2,6 +2,7 @@
 # envionment variables for backend service
 
 import os
+
 from dotenv import load_dotenv
 
 # Load environment variables only once
