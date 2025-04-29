@@ -1,5 +1,7 @@
 # ai_chat_moderation/content/views.py
 
+import logging
+
 from content.models import Comment
 from content.serializer import CommentSerializer
 from content.utils import moderate_text
@@ -10,6 +12,8 @@ from rest_framework.views import APIView
 # Create your views here.
 
 # content/views.py
+
+logger = logging.getLogger(__name__)
 
 
 class CommentView(APIView):
@@ -32,6 +36,8 @@ class CommentView(APIView):
         instance = serializer.save(
             user=user, flagged=is_flagged, moderation_labels=flagged_labels
         )
+
+        logger.info("Saved comment instance: %s", instance)
 
         # Optionally log the flagged comment for moderation
         if is_flagged:
